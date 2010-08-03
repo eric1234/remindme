@@ -1,0 +1,8 @@
+<p>Enter your e-mail address below. We will send you an e-mail that
+will allow you to reset your password.</p>
+
+<% form_tag passwords_path do %>
+  <label for="email">E-mail</label>
+  <%= text_field_tag 'email', params[:email] %>
+  <%= submit_tag 'Reset Password' %>
+<% end %>
