@@ -2,6 +2,7 @@
 will allow you to reset your password.</p>
 
 <% form_tag passwords_path do %>
+  <%= hidden_field_tag 'return_to', params[:return_to] if params.has_key? :return_to %>
   <label for="email">E-mail</label>
   <%= text_field_tag 'email', params[:email] %>
   <%= submit_tag 'Reset Password' %>

@@ -5,6 +5,7 @@ class PasswordsController < ApplicationController
     user = User.find_by_email params[:email]
     if user
       user.reset_perishable_token!
+      session[:return_to] = params[:return_to] if params.has_key? :return_to
       PasswordMailer.default_url_options[:host] = request.host
       PasswordMailer.default_url_options[:port] = request.port
       PasswordMailer.deliver_password_reset_instructions user, request
