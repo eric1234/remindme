@@ -9,3 +9,10 @@ allow them to reset their password.
 
 Once they have entered a new password they will be sent an e-mail
 informing them of the password change.
+
+= CREDIT
+
+This gem was developed by Eric Anderson (http://pixelwareinc.com) in
+part via the work done under Red Tusk Studios (http://redtusk.com).
+The call recording service SaveYourCall.com (http://saveyourcall.com)
+also contributed towards it's development.
