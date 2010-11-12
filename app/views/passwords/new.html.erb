@@ -1,9 +1,8 @@
 <p>Enter your e-mail address below. We will send you an e-mail that
 will allow you to reset your password.</p>
 
-<% form_tag passwords_path do %>
-  <%= hidden_field_tag 'return_to', params[:return_to] if params.has_key? :return_to %>
+<%= form_tag passwords_path do %>
   <label for="email">E-mail</label>
-  <%= text_field_tag 'email', params[:email] %>
+  <%= email_field_tag 'email', params[:email], :autofocus => true %>
   <%= submit_tag 'Reset Password' %>
 <% end %>

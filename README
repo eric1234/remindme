@@ -7,8 +7,8 @@ When they click the link they will be asked for their e-mail. Once
 entered if they are a valid user they will be sent a link that will
 allow them to reset their password.
 
-Once they have entered a new password they will be sent an e-mail
-informing them of the password change.
+This package requires Rails 3.x. If you are still on Rails 2.x see
+version 0.0.3 of this gem.
 
 = CREDIT
 

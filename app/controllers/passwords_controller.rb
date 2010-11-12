@@ -2,26 +2,25 @@ class PasswordsController < ApplicationController
   PUBLIC_ACTIONS = %w(new create edit update)
 
   def create
-    user = User.find_by_email params[:email]
-    if user
-      user.reset_perishable_token!
-      session[:return_to] = params[:return_to] if params.has_key? :return_to
+    authenticated_record = klass.find_by_email params[:email]
+    if authenticated_record
+      authenticated_record.reset_perishable_token!
       PasswordMailer.default_url_options[:host] = request.host
       PasswordMailer.default_url_options[:port] = request.port
-      PasswordMailer.deliver_password_reset_instructions user, request
+      PasswordMailer.password_reset_instructions(authenticated_record, request).deliver
     else  
-      flash[:warning] = "No user was found with that email address"
+      flash[:warning] = 'That e-mail was not found'
       render :action => 'new'
     end
   end
 
   def update
-    @user.password = params[:user][:password]
-    @user.password_confirmation = params[:user][:password_confirmation]
-    if @user.save
-      next_url = session[:return_to] || root_url
+    @authenticated_record.password = params[:authenticated_record][:password]
+    @authenticated_record.password_confirmation = params[:authenticated_record][:password_confirmation]
+    if @authenticated_record.save
+      next_url = session[:return_to] || home_url
       flash[:notice] = "Password successfully updated"
-      UserSession.create! @user
+      klass.session_class.create! @authenticated_record
       session.delete :return_to
       redirect_to next_url
     else  
@@ -31,10 +30,14 @@ class PasswordsController < ApplicationController
 
   private
 
-  def load_user_by_token
-    @user = User.find_using_perishable_token(params[:id]) or
-      raise ActiveRecordError::RecordNotFound, 'token invalid'
+  def load_authenticated_record_by_token
+    @authenticated_record = klass.find_using_perishable_token(params[:id]) or
+      raise ActiveRecord::RecordNotFound, 'token invalid'
   end
-  before_filter :load_user_by_token, :only => [:edit, :update]
+  before_filter :load_authenticated_record_by_token, :only => [:edit, :update]
+
+  def klass
+    @klass ||= Remindme.authenticated_model_name.constantize
+  end
 
 end

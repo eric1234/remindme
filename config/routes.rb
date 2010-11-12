@@ -1,3 +1,3 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :passwords
+Rails.application.routes.draw do
+  resources :passwords, :except => [:index, :destroy]
 end

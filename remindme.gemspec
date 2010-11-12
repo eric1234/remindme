@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = 'remindme'
-  s.version = '0.0.3'
+  s.version = '0.0.4'
   s.homepage = 'http://wiki.github.com/eric1234/remindme/'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
-  s.add_dependency 'rails'
+  s.add_dependency 'rails', '> 3'
   s.files = Dir['**/*.rb'] + Dir['**/*.rake'] + Dir['**/*.erb']
   s.has_rdoc = true
   s.extra_rdoc_files << 'README'

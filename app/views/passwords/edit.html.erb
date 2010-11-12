@@ -1,17 +1,17 @@
-<% form_for @user, :url => password_path(params[:id]), :method => :put do |u| %>
-  <%= u.error_messages %>
+<%= form_for :authenticated_record, @authenticated_record,
+  :url => password_path(params[:id]), :html => {:method => :put} do |f| %>
   <table class="form">
     <tr>
-      <th><%= u.label :password %></th>
-      <td><%= u.password_field :password %></td>
+      <th><%= f.label :password %></th>
+      <td><%= f.password_field :password %></td>
     </tr>
     <tr>
-      <th><%= u.label :password_confirmation %></th>
-      <td><%= u.password_field :password_confirmation %></td>
+      <th><%= f.label :password_confirmation %></th>
+      <td><%= f.password_field :password_confirmation %></td>
     </tr>
     <tr>
       <td></td>
-      <td><%= u.submit 'Update' %></td>
+      <td><%= f.submit 'Update' %></td>
     </tr>
   </table>
 <% end %>
