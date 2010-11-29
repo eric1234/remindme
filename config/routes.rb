@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :passwords, :except => [:index, :destroy]
+  scope Remindme.route_scope do
+    resources :passwords, :except => [:index, :destroy]
+  end
 end
