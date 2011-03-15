@@ -9,7 +9,7 @@ class PasswordsController < ApplicationController
       PasswordMailer.default_url_options[:port] = request.port
       PasswordMailer.password_reset_instructions(authenticated_record, request).deliver
     else  
-      flash[:warning] = 'That e-mail was not found'
+      flash.now[:warning] = 'That e-mail was not found'
       render :action => 'new'
     end
   end
@@ -18,7 +18,7 @@ class PasswordsController < ApplicationController
     @authenticated_record.password = params[:authenticated_record][:password]
     @authenticated_record.password_confirmation = params[:authenticated_record][:password_confirmation]
     if @authenticated_record.save
-      next_url = session[:return_to] || home_url
+      next_url = session[:return_to] || send(Remindme.final_destination)
       flash[:notice] = "Password successfully updated"
       klass.session_class.create! @authenticated_record
       session.delete :return_to

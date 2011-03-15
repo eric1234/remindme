@@ -9,6 +9,12 @@ module Remindme
   mattr_accessor :authenticated_model_name
   self.authenticated_model_name = 'User'
 
+  # A named route that the user should be directed to after the entire
+  # reset process is done (they requested reset, got e-mail, followed
+  # link, updated password, ...what next...). Defaults to root_url.
+  mattr_accessor :final_destination
+  self.final_destination = :root_url
+
   # If your app is in a subdirectory you need to be able to indicate
   # that all routes should be scoped to a directory. Of course leave
   # as nil if your app is in the root directory.
