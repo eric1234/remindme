@@ -13,6 +13,7 @@ version 0.0.3 of this gem.
 = CREDIT
 
 This gem was developed by Eric Anderson (http://pixelwareinc.com) in
-part via the work done under Red Tusk Studios (http://redtusk.com).
-The call recording service SaveYourCall.com (http://saveyourcall.com)
-also contributed towards it's development.
+part via the work done under Red Tusk Studios (http://redtusk.com) and
+work done under CorData (http://cordata.com). The call recording service
+SaveYourCall.com (http://saveyourcall.com) also contributed towards it's
+development.
