@@ -15,8 +15,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @authenticated_record.password = params[:authenticated_record][:password]
-    @authenticated_record.password_confirmation = params[:authenticated_record][:password_confirmation]
+    @authenticated_record.attributes = params[:authenticated_record]
     if @authenticated_record.save
       next_url = session[:return_to] || send(Remindme.final_destination)
       flash[:notice] = "Password successfully updated"

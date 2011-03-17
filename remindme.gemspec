@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'remindme'
-  s.version = '0.1.0'
+  s.version = '0.1.1'
   s.homepage = 'http://wiki.github.com/eric1234/remindme/'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
