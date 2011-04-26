@@ -1,5 +1,6 @@
 <%= form_for :authenticated_record, @authenticated_record,
-  :url => password_path(params[:id]), :html => {:method => :put} do |f| %>
+  :url => password_path(params[:id]),
+  :html => {:method => :put, :id => 'edit_password'} do |f| %>
   <table class="form">
     <tr>
       <th><%= f.label :password %></th>
