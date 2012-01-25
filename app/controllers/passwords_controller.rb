@@ -1,4 +1,7 @@
 class PasswordsController < ApplicationController
+  # For logmein integration. If you are not using logmein you need to ensure
+  # your authentication system allows access to these actions without being
+  # authenticated.
   PUBLIC_ACTIONS = %w(new create edit update)
 
   def create
@@ -8,7 +11,7 @@ class PasswordsController < ApplicationController
       PasswordMailer.default_url_options[:host] = request.host
       PasswordMailer.default_url_options[:port] = request.port
       PasswordMailer.password_reset_instructions(authenticated_record, request).deliver
-    else  
+    else
       flash.now[:warning] = 'That e-mail was not found'
       render :action => 'new'
     end
@@ -19,22 +22,25 @@ class PasswordsController < ApplicationController
     if @authenticated_record.save
       next_url = session[:return_to] || send(Remindme.final_destination)
       flash[:notice] = "Password successfully updated"
+      # Go ahead an log the user in in case the redirect is to a restricted page
       klass.session_class.create! @authenticated_record
       session.delete :return_to
       redirect_to next_url
-    else  
+    else
       render :action => :edit
-    end  
+    end
   end
 
   private
 
+  # Verify token so user can update password.
   def load_authenticated_record_by_token
     @authenticated_record = klass.find_using_perishable_token(params[:id]) or
       raise ActiveRecord::RecordNotFound, 'token invalid'
   end
   before_filter :load_authenticated_record_by_token, :only => [:edit, :update]
 
+  # Dymanically determine the authenticated model based on config.
   def klass
     @klass ||= Remindme.authenticated_model_name.constantize
   end

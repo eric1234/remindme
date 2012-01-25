@@ -1,0 +1,100 @@
+= Description
+
+A drop-in "forgot password" feature based on Authlogic. Provides:
+
+* Screen for user to enter e-mail address
+* Mailer to send token link
+* Screen for user to update their password
+
+= Setup
+
+Add to your Gemfile
+
+    gem 'remindme'
+
+If the model being authenticated is something other than "User" then in an
+initializer add:
+
+    Remindme.authenticated_model_name = 'Account'
+
+Replace 'Account' with whatever your actual model name is. The model should use
+Authlogic and likely will look something like this:
+
+    class User < ActiveRecord::Base
+      acts_as_authentic
+    end
+
+This plugin depends on you to already be setup correctly to allow a password
+to be stored on the authenticated model (i.e your password and salt hashes). But
+it does include a migration that will add the token field to your model. To add
+this migration to your app just run:
+
+    rake railties:install:migrations
+
+To include a link to the "forgot password" feature just add something like this
+on your login page.
+
+    <%= link_to 'Forgot My Password', new_password_path %>
+
+After the password is reset this plugin needs to know where to send the user.
+It first checks the session variable 'return_to' (for logmein integration), but
+if that is not set then it will by default redirect to whatever "root_url"
+returns (this is a named route defined in most apps that usually redirects to
+the home page). If you want a different location just configure as follows:
+
+    Remindme.final_destination = :dashboard_url
+
+The symbol given will be called as a method. This is usually some named route.
+
+A final bit of configuration. The e-mail received by the user will appear to
+be coming from no-reply@yourdomain.com (replace yourdomain.com with whatever
+the domain of the web request is). If you want it to come from a different
+e-mail just update as follows:
+
+    PasswordMailer.from_user = 'support'
+
+This will make it appear to be coming from support@yourdomain.com. You cannot
+currently configure the domain or the subject line of the message but you can
+override the e-mail template if you wish.
+
+= Integration with logmein[https://github.com/eric1234/logmein]
+
+This plugin was designed to work in conjuction with the logmein plugin. Although
+not dependent on logmein they work well together and if you need a login plugin
+I would suggest it. Here is how you would setup both:
+
+In your Gemfile:
+
+    gem 'logmein'
+    gem 'remindme'
+
+(Optional) If your authenticated model is something other than User:
+
+    Logmein.authenticated_model_name =
+      Remindme.authenticated_model_name = 'Account'
+
+Make sure your authenticated model is setup to use Authlogic:
+
+    class User < ActiveRecord::Base
+      acts_as_authentic
+    end
+
+Run this to import migrations from both plugins:
+
+    rake railties:install:migrations
+
+Run the migrations and you should be all set!
+
+= Todo
+
+It would be useful to add another e-mail to the mailer that will let the user
+know their password has been updated. This way they get that verification and
+if someone else uses this to update their password against their wishes, at
+least we will have warned them.
+
+= Credit
+
+* Developed by Eric Anderson (pixelwareinc.com)
+* Enhanced via projects developed under Red Tusk Studios (redtusk.com)
+* SaveYourCall.com (saveyourcall.com), a call recording service, also
+  contributed towards development.
