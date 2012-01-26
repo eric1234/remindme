@@ -37,10 +37,11 @@ on your login page.
     <%= link_to 'Forgot My Password', new_password_path %>
 
 After the password is reset this plugin needs to know where to send the user.
-It first checks the session variable 'return_to' (for logmein integration), but
-if that is not set then it will by default redirect to whatever "root_url"
-returns (this is a named route defined in most apps that usually redirects to
-the home page). If you want a different location just configure as follows:
+It first checks the session variable 'return_to' (for
+logmein[https://github.com/eric1234/logmein] integration), but if that is not
+set then it will by default redirect to whatever "root_url" returns (this is a
+named route defined in most apps that usually redirects to the home page). If
+you want a different location just configure as follows:
 
     Remindme.final_destination = :dashboard_url
 
@@ -94,7 +95,7 @@ least we will have warned them.
 
 = Credit
 
-* Developed by Eric Anderson (pixelwareinc.com)
-* Enhanced via projects developed under Red Tusk Studios (redtusk.com)
-* SaveYourCall.com (saveyourcall.com), a call recording service, also
+* Developed by Eric Anderson (http://pixelwareinc.com)
+* Enhanced via projects developed under Red Tusk Studios (http://redtusk.com)
+* SaveYourCall.com (http://saveyourcall.com), a call recording service, also
   contributed towards development.
