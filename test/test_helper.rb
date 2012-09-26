@@ -45,6 +45,7 @@ end
 
 # The app would normally define this for us.
 class User < ActiveRecord::Base
+  attr_accessible :email, :password, :password_confirmation
 
   connection.create_table :users do |t|
     t.string :email, :null => false

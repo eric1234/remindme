@@ -1,4 +1,5 @@
 class PasswordsController < ApplicationController
+
   # For logmein integration. If you are not using logmein you need to ensure
   # your authentication system allows access to these actions without being
   # authenticated.
@@ -36,7 +37,7 @@ class PasswordsController < ApplicationController
   # Verify token so user can update password.
   def load_authenticated_record_by_token
     @authenticated_record = klass.find_using_perishable_token(params[:id]) or
-      raise ActiveRecord::RecordNotFound, 'token invalid'
+      raise ActionController::RoutingError, 'token invalid'
   end
   before_filter :load_authenticated_record_by_token, :only => [:edit, :update]
 
