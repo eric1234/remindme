@@ -45,9 +45,9 @@ class PasswordsControllerTest < ActionController::TestCase
   end
 
   test 'edit password form - invalid token' do
-    assert_raises ActionController::RoutingError do
-      get :edit, :id => 'invalid'
-    end
+    get :edit, :id => 'invalid'
+    assert_response :success
+    assert_match /invalid/i, @response.body
   end
 
   test 'save password - success' do

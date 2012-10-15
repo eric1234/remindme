@@ -36,8 +36,8 @@ class PasswordsController < ApplicationController
 
   # Verify token so user can update password.
   def load_authenticated_record_by_token
-    @authenticated_record = klass.find_using_perishable_token(params[:id]) or
-      raise ActionController::RoutingError, 'token invalid'
+    @authenticated_record = klass.find_using_perishable_token(params[:id])
+    render :action => 'invalid' unless @authenticated_record
   end
   before_filter :load_authenticated_record_by_token, :only => [:edit, :update]
 
