@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    remindme (0.2.2)
+    remindme (0.2.3)
       authlogic
       rails (> 3)
 
