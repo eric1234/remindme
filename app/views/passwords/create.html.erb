@@ -3,6 +3,6 @@
 <p>
   Password reset instructions have been mailed to you. Please check your
   e-mail. Be sure to check your junk folder and add
-  <%= PasswordMailer.from_user %>@<%= request.domain %> to your address
-  book.
+  <%= PasswordMailer.from_user %>@<%= PasswordMailer.domain || request.domain %>
+  to your address book.
 </p>
