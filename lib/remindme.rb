@@ -1,5 +1,9 @@
-# Just in case the app doesn't declare it as a direct dependency
-require 'authlogic'
+# We ideally want the application not need to declare the dependency
+# on authlogic. It is just implied since remindme only works with
+# authlogic. But authlogic assumes ActiveRecord. There are ways to make
+# authlogic work without ActiveRecord so we only want to do this
+# require if the app is using ActiveRecord
+require 'authlogic' if defined? ActiveRecord
 
 # We are trying to avoid accessive configuration but if a bit of config
 # will go a long way towards making this gem work for many apps then
