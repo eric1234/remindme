@@ -1,8 +1,8 @@
 class PasswordsController < ApplicationController
 
-  # For logmein integration. If you are not using logmein you need to ensure
-  # your authentication system allows access to these actions without being
-  # authenticated.
+  # For logmein integration. If you are not using logmein you need to
+  # ensure your authentication system allows access to these actions
+  # without being authenticated.
   PUBLIC_ACTIONS = %w(new create edit update)
 
   def create
@@ -19,7 +19,8 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    @authenticated_record.attributes = params[:authenticated_record]
+    @authenticated_record.password = params[:authenticated_record][:password]
+    @authenticated_record.password_confirmation = params[:authenticated_record][:password_confirmation]
     if @authenticated_record.save
       next_url = session[:return_to] || send(Remindme.final_destination)
       flash[:notice] = "Password successfully updated"
