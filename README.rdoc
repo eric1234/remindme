@@ -1,3 +1,6 @@
+NOTE: This gem is deprecated and shouldn't be used on new projects. There are
+lots of other solutions outh there with better features and support.
+
 = Description
 
 A drop-in "forgot password" feature based on Authlogic. Provides:

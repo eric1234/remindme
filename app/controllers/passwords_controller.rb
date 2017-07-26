@@ -40,7 +40,7 @@ class PasswordsController < ApplicationController
     @authenticated_record = klass.find_using_perishable_token(params[:id])
     render :action => 'invalid' unless @authenticated_record
   end
-  before_filter :load_authenticated_record_by_token, :only => [:edit, :update]
+  before_action :load_authenticated_record_by_token, :only => [:edit, :update]
 
   # Dymanically determine the authenticated model based on config.
   def klass

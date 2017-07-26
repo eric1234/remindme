@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   s.name = 'remindme'
-  s.version = '0.2.7'
+  s.version = '0.3.0'
   s.homepage = 'https://github.com/eric1234/remindme'
   s.author = 'Eric Anderson'
   s.email = 'eric@pixelwareinc.com'
   s.license = 'Public domain'
-  s.add_dependency 'rails', '> 3'
+  s.add_dependency 'rails', '>= 4'
   s.add_dependency 'authlogic'
   s.add_development_dependency 'test_engine'
   s.add_development_dependency 'capybara'
